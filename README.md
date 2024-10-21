@@ -67,6 +67,34 @@ It is recommended to create a virtual environment for the project to manage depe
 ### 3. Install Dependencies
 
 Once the virtual environment is set up, install the required dependencies by running the command specified in the `requirements.txt` file.
+Here’s the `requirements.txt` file based on the libraries and tools typically used for your Flask project with a machine learning model (Random Forest Regressor) and dataset processing:
+
+### `requirements.txt`
+```
+Flask==2.0.1
+scikit-learn==0.24.2
+pandas==1.2.4
+numpy==1.20.3
+Werkzeug==2.0.1
+gunicorn==20.1.0
+```
+
+### Explanation of the Dependencies:
+
+- **Flask**: The web framework used to build the web app.
+- **scikit-learn**: For the machine learning model (Random Forest Regressor).
+- **pandas**: Used for handling and manipulating datasets.
+- **numpy**: Used for numerical operations, often in conjunction with pandas and scikit-learn.
+- **Werkzeug**: Flask uses Werkzeug as one of its dependencies for routing and request handling.
+- **gunicorn**: A production WSGI server for running Flask apps in deployment environments.
+
+To install these dependencies, you can run:
+
+```bash
+pip install -r requirements.txt
+```
+
+This should set up your environment with the necessary packages for your project. Let me know if you need any other adjustments!
 
 ### 4. Run the Flask App
 
@@ -77,9 +105,15 @@ Run the Flask app on your local machine. By default, Flask will run on `http://1
 If you want to access the app from a mobile device, ensure that both your computer (where Flask is running) and your mobile device are connected to the same Wi-Fi network. Find your computer's IP address and access the app via `http://<your-ip-address>:5000` on your mobile browser.
 
 ### 6. Customize Background Image
+The app allows you to upload a custom background image from your device. This feature enhances the user experience by allowing personalization of the interface.
+
+### 7. Conclusion
+This project showcases the combination of a machine learning model with a modern web interface to create a fare prediction tool. The Random Forest model provides reliable fare predictions based on user inputs such as weather, traffic, and distance traveled. The dynamic and visually appealing user interface makes the app engaging, while the ability to access it via mobile devices offers flexibility.
 
 The app allows you to upload a custom background image from your device. This feature enhances the user experience by allowing personalization of the interface.
 
-## Conclusion
 
-This project showcases the combination of a machine learning model with a modern web interface to create a fare prediction tool. The Random Forest model provides reliable fare predictions based on user inputs such as weather, traffic, and distance traveled. The dynamic and visually appealing user interface makes the app engaging, while the ability to access it via mobile devices offers flexibility. 
+
+
+## Sample Image :
+<img src="sample website.png" alt="Sample Website" />
