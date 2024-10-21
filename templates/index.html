@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Fare Prediction</title>
+    <!-- Link to FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Add custom fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
+    <!-- Custom CSS for futuristic design -->
+    <style>
+        /* Full-page background with a faded photo effect */
+        body {
+            background: url("http://127.0.0.1:5000/static/ww.webp") no-repeat center center fixed;
+
+            background-size: cover;
+            color: #FFFFFF;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Adding a dark overlay to fade the background */
+        body:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Dark overlay to ensure readability */
+            z-index: -1;
+        }
+
+        .container {
+            background: linear-gradient(145deg, rgba(9, 9, 121, 0.236), rgba(0, 213, 255, 0.049));
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 1200px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.9), 0 0 40px rgba(0, 212, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            color: #00FFFF;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 25px rgba(0, 212, 255, 1);
+            transition: all 0.3s ease;
+        }
+
+        h2:hover {
+            text-shadow: 0 0 30px rgba(0, 255, 255, 1.2), 0 0 35px rgba(0, 212, 255, 1.2);
+            transform: scale(1.05);
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+        }
+
+        label {
+            font-size: 1.2rem;
+            color: #00FFFF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        select, input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            border-radius: 15px;
+            border: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #00FFFF;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2), 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        select:focus, input[type="text"]:focus {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.8);
+        }
+
+        input[type="text"]:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translateY(-5px); /* Floating effect on hover */
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.7);
+        }
+
+        input[type="submit"] {
+            grid-column: span 3;
+            background-color: #00FFFF;
+            color: #0D0D0D;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 212, 255, 0.7);
+            animation: pulseGlow 2s infinite; /* Pulsing glow effect */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #009999;
+            transform: scale(1.05);
+        }
+
+        /* Adding glowing animation to the submit button */
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 212, 255, 0.7); }
+            50% { box-shadow: 0 0 35px rgba(0, 255, 255, 1), 0 0 40px rgba(0, 212, 255, 1); }
+            100% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 212, 255, 0.7); }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .prediction {
+            margin-top: 20px;
+            font-size: 1.4rem;
+            text-align: center;
+            color: #00FFFF;
+            animation: glow 1s infinite alternate;
+            grid-column: span 3;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00FFFF; }
+            to { text-shadow: 0 0 20px #00FFFF; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2><i class="fas fa-taxi"></i> Fare Prediction</h2>
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="weather"><i class="fas fa-cloud-sun icon"></i>Weather:</label>
+                <select name="weather" id="weather">
+                    <option value="sunny">Sunny</option>
+                    <option value="cloudy">Cloudy</option>
+                    <option value="windy">Windy</option>
+                    <option value="stormy">Stormy</option>
+                    <option value="snowy">Snowy</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="car_condition"><i class="fas fa-car icon"></i>Car Condition:</label>
+                <select name="car_condition" id="car_condition">
+                    <option value="Excellent">Excellent</option>
+                    <option value="Very Good">Very Good</option>
+                    <option value="Good">Good</option>
+                    <option value="Bad">Bad</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="traffic_condition"><i class="fas fa-traffic-light icon"></i>Traffic Condition:</label>
+                <select name="traffic_condition" id="traffic_condition">
+                    <option value="Flow Traffic">Flow Traffic</option>
+                    <option value="Congested Traffic">Congested Traffic</option>
+                    <option value="Heavy Traffic">Heavy Traffic</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="distance"><i class="fas fa-road icon"></i>Distance:</label>
+                <input type="text" name="distance" id="distance" placeholder="Enter distance">
+            </div>
+
+            <div class="form-group">
+                <label for="jfk_dist"><i class="fas fa-plane-departure icon"></i>JFK Distance:</label>
+                <input type="text" name="jfk_dist" id="jfk_dist" placeholder="Enter JFK distance">
+            </div>
+
+            <div class="form-group">
+                <label for="ewr_dist"><i class="fas fa-plane-arrival icon"></i>EWR Distance:</label>
+                <input type="text" name="ewr_dist" id="ewr_dist" placeholder="Enter EWR distance">
+            </div>
+
+            <div class="form-group">
+                <label for="lga_dist"><i class="fas fa-helicopter icon"></i>LGA Distance:</label>
+                <input type="text" name="lga_dist" id="lga_dist" placeholder="Enter LGA distance">
+            </div>
+
+            <div class="form-group">
+                <label for="nyc_dist"><i class="fas fa-city icon"></i>NYC Distance:</label>
+                <input type="text" name="nyc_dist" id="nyc_dist" placeholder="Enter NYC distance">
+            </div>
+
+            <div class="form-group">
+                <label for="bearing"><i class="fas fa-compass icon"></i>Bearing:</label>
+                <input type="text" name="bearing" id="bearing" placeholder="Enter bearing">
+            </div>
+
+            <input type="submit" value="Predict Fare">
+
+            <div class="prediction">
+                <h3>{{ prediction_text }}</h3>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
